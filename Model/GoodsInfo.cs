@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Model
 {
-    //商品
-    public class GoodType
+    public class GoodsInfo
     {
         [Key]
         public int GoodId { get; set; }

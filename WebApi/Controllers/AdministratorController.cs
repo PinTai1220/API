@@ -20,9 +20,11 @@ namespace WebApi.Controllers
         /// <returns></returns>
         public int Get(string AdministratorAccount, string AdministratorPwd)
         {
-            Administrator administrator = new Administrator();
-            administrator.AdministratorAccount = AdministratorAccount;
-            administrator.AdministratorPwd = AdministratorPwd;
+            Administrator administrator = new Administrator
+            {
+                AdministratorAccount = AdministratorAccount,
+                AdministratorPwd = AdministratorPwd
+            };
             return abll.Login(administrator);
         }
         /// <summary>
