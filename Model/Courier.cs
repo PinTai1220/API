@@ -9,6 +9,7 @@ namespace Model
 {
     public class Courier
     {
+        //快递表
         [Key]
         public int CourierId { get; set; }
         /// <summary>
