@@ -9,6 +9,7 @@ namespace Model
 {
     public class Administrator
     {
+        //管理员
         [Key]
         public int AdministratorId { get; set; }
         /// <summary>
