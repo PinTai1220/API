@@ -9,6 +9,9 @@ namespace Model
 {
     public class Courier
     {
+        /// <summary>
+        /// 标识列
+        /// </summary>
         [Key]
         public int CourierId { get; set; }
         /// <summary>

@@ -10,6 +10,9 @@ namespace Model
     //订单
     public class OrderInfo
     {
+        /// <summary>
+        /// 标识列
+        /// </summary>
         [Key]
         public int OrderId { get; set; }
         /// <summary>
@@ -17,9 +20,25 @@ namespace Model
         /// </summary>
         public string OrderNum { get; set; }
         /// <summary>
+        /// 收货人
+        /// </summary>
+        public string OTGName { get; set; }
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string OTGPhone { get; set; }
+        /// <summary>
+        /// 收货地址
+        /// </summary>
+        public string OTGAddress { get; set; }
+        /// <summary>
         /// 购物车id
         /// </summary>
         public int SCID { get; set; }
+        /// <summary>
+        /// 商品名称
+        /// </summary>
+        public string OGoodName { get; set; }
         /// <summary>
         /// 订单状态
         /// </summary>
