@@ -18,7 +18,8 @@ namespace WebApi.Controllers
         /// <param name="AdministratorAccount"></param>
         /// <param name="AdministratorPwd"></param>
         /// <returns></returns>
-        public int Get(string AdministratorAccount, string AdministratorPwd)
+        [HttpGet]
+        public int Login(string AdministratorAccount, string AdministratorPwd)
         {
             Administrator administrator = new Administrator
             {
@@ -32,7 +33,8 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="administrator"></param>
         /// <returns></returns>
-        public int Put(Administrator administrator)
+        [HttpPost]
+        public int Put([FromBody]Administrator administrator)
         {
             return abll.Upt(administrator);
         }

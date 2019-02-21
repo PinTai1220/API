@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministratorBll.cs" />
+    <Compile Include="CourierBll.cs" />
     <Compile Include="GoodsInfoBll.cs" />
     <Compile Include="GoodTypeBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

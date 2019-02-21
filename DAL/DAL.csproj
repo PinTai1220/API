@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministratorDal.cs" />
+    <Compile Include="CourierDal.cs" />
     <Compile Include="GoodsInfoDal.cs" />
     <Compile Include="GoodTypeDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
