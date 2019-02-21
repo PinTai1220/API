@@ -18,10 +18,11 @@ namespace DAL
         /// <returns></returns>
         public int Add(UserInfo t)
         {
+            UserInfo data = t as UserInfo;
             using (EFContext Context = new EFContext())
             {
-                t.UserCraeteTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-                DbEntityEntry<UserInfo> dbEntityUser = Context.Entry<UserInfo>(t);
+                data.UserCraeteTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                DbEntityEntry<UserInfo> dbEntityUser = Context.Entry<UserInfo>(data);
                 try
                 {
                     return Context.SaveChanges();
@@ -45,14 +46,35 @@ namespace DAL
         /// <summary>
         /// 返回所有用户信息
         /// </summary>
+        /// <param name="obj">参数数组(string 查询关键字,int 页码,int 记录数 )</param>
         /// <returns></returns>
-        public List<UserInfo> SelectAll()
+        public List<object> SelectAll(object[] obj)
         {
+            string str = obj[0].ToString();
+            int PageIndex= IsNumber.IsNum(obj[1].ToString()) ? int.Parse(obj[1].ToString()) : 1;
+            int PageSize = IsNumber.IsNum(obj[2].ToString()) ? int.Parse(obj[3].ToString()) : 10;
             using (EFContext Context = new EFContext())
             {
-                List<UserInfo> users = (from s in Context.UserInfo
-                                        select s).ToList();
-                return users;
+                var users = (from s in Context.UserInfo
+                             join b in Context.TakeGoodsInfo
+                             on s.UserId equals b.UID
+                             select new
+                             {
+                                 UserAccount=s.UserAccount,
+                                 PhotoPath=s.PhotoPath,
+                                 UserName=s.UserName,
+                                 PhoneNumber=s.PhoneNumber,
+                                 Email=s.Email,
+                                 TGName = b.TGName,
+                                 TGAddress=b.TGAddress,
+                                 TGPhone=b.TGPhone
+                             }).Where(m=>str==""?true:m.UserAccount==str || m.UserName==str ||m.PhoneNumber==str||m.Email==str || m.TGName == str || m.TGPhone == str || m.TGAddress.Contains(str)).Skip(( PageIndex- 1) * PageSize).Take(PageSize).ToList();
+                List<object> data = new List<object>();
+                foreach (var item in users)
+                {
+                    data.Add(item);
+                }
+                return data;
             }
         }
         /// <summary>

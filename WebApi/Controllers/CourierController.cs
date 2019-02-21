@@ -22,9 +22,10 @@ namespace WebApi.Controllers
         /// <param name="IndexPage">页码</param>
         /// <param name="IndexSize">记录数</param>
         /// <returns></returns>
-        public List<object> GetSome(string CourierNum, string OTGName, string OTGPhone,string OTGAddress, int IndexPage, int IndexSize)
+        [HttpGet]
+        public List<object> GetSome(string str, int IndexPage, int IndexSize)
         {
-            return CourierBll.list(CourierNum, OTGName, OTGPhone, OTGAddress, IndexPage, IndexSize);
+            return CourierBll.List(str, IndexPage, IndexSize);
         }
     }
 }

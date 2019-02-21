@@ -63,18 +63,18 @@ namespace DAL
         /// 禁用
         /// </summary>
         /// <returns></returns>
-        public List<Administrator> SelectAll()
+        public List<object> SelectAll(object[] obj)
         {
             throw new NotImplementedException();
         }
         /// <summary>
-        /// 禁用
+        /// 根据id获取管理员对象
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="Id">对象id</param>
         /// <returns></returns>
         public Administrator SelectById(int Id)
         {
-            throw new NotImplementedException();
+            return DBHelper.GetList<Administrator>("select * from Administrator where AdministratorId=" + Id).ToList().FirstOrDefault();
         }
         /// <summary>
         /// 修改密码或修改发货信息

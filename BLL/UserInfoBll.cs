@@ -10,11 +10,24 @@ namespace BLL
 {
     public class UserInfoBll
     {
-        UserInfoDal user = new UserInfoDal();
+        UserInfoDal userdal = new UserInfoDal();
         public int Add(UserInfo use)
         {
             use.UserCraeteTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-            return user.Add(use);
+            return userdal.Add(use);
+        }
+        public List<object> List(string str,int PageIndex,int PageSize)
+        {
+            object[] obj = { str, PageIndex, PageSize };
+            return userdal.SelectAll(obj);
+        }
+        public UserInfo GetById(int id)
+        {
+            return userdal.SelectById(id);
+        }
+        public int Upt(UserInfo use)
+        {
+            return userdal.Upt(use);
         }
     }
 }

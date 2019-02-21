@@ -10,9 +10,9 @@ namespace BLL
 {
     public class CourierBll
     {
-        public static List<object> list(string CourierNum, string OTGName, string OTGPhone,string OTGAddress, int IndexPage, int IndexSize)
+        public static List<object> List(string str, int IndexPage, int IndexSize)
         {
-            return CourierDal.list(CourierNum, OTGName, OTGPhone, OTGAddress, IndexPage, IndexSize);
+            return CourierDal.List(str, IndexPage, IndexSize);
         }
     }
 }

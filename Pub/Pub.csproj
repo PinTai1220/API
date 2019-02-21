@@ -57,6 +57,7 @@
     <Compile Include="DBHelper.cs" />
     <Compile Include="EFContext.cs" />
     <Compile Include="IOperation_generic.cs" />
+    <Compile Include="IsNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
