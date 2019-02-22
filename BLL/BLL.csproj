@@ -50,6 +50,7 @@
     <Compile Include="GoodsInfoBll.cs" />
     <Compile Include="GoodTypeBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCartBll.cs" />
     <Compile Include="UserInfoBll.cs" />
   </ItemGroup>
   <ItemGroup>

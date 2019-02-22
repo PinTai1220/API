@@ -21,6 +21,7 @@ namespace DAL
         {
             using (EFContext Context = new EFContext())
             {
+                t.GoodCreateTime= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
                 DbEntityEntry<GoodsInfo> dbEntityAdm = Context.Entry<GoodsInfo>(t);
                 dbEntityAdm.State = System.Data.Entity.EntityState.Added;
                 return Context.SaveChanges();
@@ -58,7 +59,7 @@ namespace DAL
                                              GoodSum=s.GoodSum,
                                              GoodPrice=s.GoodPrice,
                                              GoodTypeName=b.GoodTypeName
-                                         }).Where(m => str == "" ? true : m.GoodName == str || m.GoodInfo.Contains(str) || m.GoodTypeName == str).Skip((IndexPage - 1) * IndexSize).Take(IndexSize).ToList();
+                                         }).Where(m => str == "" ? true : m.GoodName == str || m.GoodInfo.Contains(str) || m.GoodTypeName == str).Reverse().Skip((IndexPage - 1) * IndexSize).Take(IndexSize).ToList();
                 List<object> data = new List<object>();
                 foreach (var item in goods)
                 {

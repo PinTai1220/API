@@ -31,8 +31,7 @@ namespace DAL
                     };
                     DbEntityEntry<Administrator> dbEntityAdm = Context.Entry<Administrator>(administrator);
                     dbEntityAdm.State = System.Data.Entity.EntityState.Added;
-                    Context.SaveChanges();
-                    return 1;
+                    return Context.SaveChanges();
                 }
                 else
                 {

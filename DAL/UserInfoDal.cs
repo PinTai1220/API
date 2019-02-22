@@ -39,6 +39,7 @@ namespace DAL
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
+        [Obsolete]
         public int Delete(int Id)
         {
             throw new NotImplementedException();
@@ -68,7 +69,7 @@ namespace DAL
                                  TGName = b.TGName,
                                  TGAddress=b.TGAddress,
                                  TGPhone=b.TGPhone
-                             }).Where(m=>str==""?true:m.UserAccount==str || m.UserName==str ||m.PhoneNumber==str||m.Email==str || m.TGName == str || m.TGPhone == str || m.TGAddress.Contains(str)).Skip(( PageIndex- 1) * PageSize).Take(PageSize).ToList();
+                             }).Where(m=>str==""?true:m.UserAccount==str || m.UserName==str ||m.PhoneNumber==str||m.Email==str || m.TGName == str || m.TGPhone == str || m.TGAddress.Contains(str)).Reverse().Skip(( PageIndex- 1) * PageSize).Take(PageSize).ToList();
                 List<object> data = new List<object>();
                 foreach (var item in users)
                 {
