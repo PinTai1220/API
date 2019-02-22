@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using Newtonsoft.Json;  //  注意引用 NEWTONSOFT
 using System.Configuration;
 
-namespace Pub
+namespace DAL
 {
     public  class DBHelper
     {
