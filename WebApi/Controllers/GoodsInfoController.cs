@@ -28,11 +28,13 @@ namespace WebApi.Controllers
         /// <param name="parameters"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<object> SelectPart(string str, string PageIndex, string PageSize)
+        public List<object> SelectPart(string str, string PageIndex, string PageSize,string state)
         {
             try
             {
-                object[] obj = { str, PageIndex, PageSize };
+                if (str == null)
+                    str = "";
+                object[] obj = { str, PageIndex, PageSize,state };
                 return Gbll.SelectAll(obj);
             }
             catch (Exception)
