@@ -48,12 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
+    <Compile Include="AddressInfo.cs" />
     <Compile Include="Administrator.cs" />
     <Compile Include="Courier.cs" />
+    <Compile Include="GoodCommend.cs" />
     <Compile Include="GoodsInfo.cs" />
     <Compile Include="GoodType.cs" />
     <Compile Include="OrderInfo.cs" />
+    <Compile Include="SalesRecord.cs" />
     <Compile Include="ShoppingCart.cs" />
     <Compile Include="TakeGoodsInfo.cs" />
     <Compile Include="UserInfo.cs" />

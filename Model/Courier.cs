@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Model
 {
+    [Table("Courier")]
     public class Courier
     {
+        /// <summary>
+        /// 标识列
+        /// </summary>
         [Key]
         public int CourierId { get; set; }
         /// <summary>

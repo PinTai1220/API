@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using Model;
 
-namespace Pub
+namespace DAL
 {
     public class EFContext:DbContext
     {
@@ -15,7 +15,7 @@ namespace Pub
         public virtual DbSet<Administrator> Administrator { get; set; }
         public virtual DbSet<Courier> Courier { get; set; }
         public virtual DbSet<TakeGoodsInfo> TakeGoodsInfo { get; set; }
-        public virtual DbSet<GoodType> GoodsInfo { get; set; }
+        public virtual DbSet<GoodsInfo> GoodsInfo { get; set; }
         public virtual DbSet<GoodType> GoodType { get; set; }
         public virtual DbSet<OrderInfo> OrderInfo { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }

@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Pub;
+using System.Data;
+using System.Data.Entity.Infrastructure;
 
 namespace DAL
 {
-    public class GoodsInfoDal : I0peration_generic<GoodType>
+    public class GoodsInfoDal : I0peration_generic<GoodsInfo>
     {
         /// <summary>
         /// 商品添加
         /// </summary>
         /// <param name="t">商品对象</param>
         /// <returns></returns>
-        public int Add(GoodType t)
+        public int Add(GoodsInfo t)
         {
             using (EFContext Context = new EFContext())
             {
-                DbEntityEntry<GoodType> dbEntityAdm = Context.Entry<GoodType>(t);
+                t.GoodCreateTime= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                DbEntityEntry<GoodsInfo> dbEntityAdm = Context.Entry<GoodsInfo>(t);
                 dbEntityAdm.State = System.Data.Entity.EntityState.Added;
                 return Context.SaveChanges();
             }
@@ -38,13 +40,32 @@ namespace DAL
         /// 查询所有商品
         /// </summary>
         /// <returns></returns>
-        public List<GoodType> SelectAll()
+        public List<object> SelectAll(object[] obj)
         {
+            string str = obj[0].ToString();
+            int IndexPage = IsNumber.IsNum(obj[1].ToString()) ? int.Parse(obj[1].ToString()) : 1;
+            int IndexSize = IsNumber.IsNum(obj[2].ToString()) ? int.Parse(obj[3].ToString()) : 10;
             using (EFContext Context = new EFContext())
             {
-                List<GoodType> goods = (from s in Context.GoodsInfo
-                                         select s).ToList();
-                return goods;
+                var goods = (from s in Context.GoodsInfo
+                                         join b in Context.GoodType
+                                         on s.GTID equals b.GoodTypeId
+                                         select new
+                                         {
+                                             GoodPhotoPath=s.GoodPhotoPath,
+                                             GoodName=s.GoodName,
+                                             GoodInfo=s.GoodInfo,
+                                             GoodSellSum=s.GoodSellSum,
+                                             GoodSum=s.GoodSum,
+                                             GoodPrice=s.GoodPrice,
+                                             GoodTypeName=b.GoodTypeName
+                                         }).Where(m => str == "" ? true : m.GoodName == str || m.GoodInfo.Contains(str) || m.GoodTypeName == str).Reverse().Skip((IndexPage - 1) * IndexSize).Take(IndexSize).ToList();
+                List<object> data = new List<object>();
+                foreach (var item in goods)
+                {
+                    data.Add(item);
+                }
+                return data;
             }
         }
         /// <summary>
@@ -52,13 +73,13 @@ namespace DAL
         /// </summary>
         /// <param name="Id">商品id</param>
         /// <returns></returns>
-        public GoodType SelectById(int Id)
+        public GoodsInfo SelectById(int Id)
         {
             using (EFContext Context = new EFContext())
             {
-                GoodType good = (from s in Context.GoodsInfo
-                                   where s.GoodId.Equals(Id)
-                                   select s).FirstOrDefault();
+                GoodsInfo good = (from s in Context.GoodsInfo
+                                  where s.Equals(Id)
+                                  select s).FirstOrDefault();
                 return good;
             }
         }
@@ -67,23 +88,19 @@ namespace DAL
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        public int Upt(GoodType t)
-        { 
-             return DBHelper.ExecuteNonQuery($"update GoodInfo set GoodPhotoPath='{t.GoodPhotoPath}',GoodName='{t.GoodName}',GoodInfo='{t.GoodInfo}',GoodSum={t.GoodSum},GoodPrice={t.GoodPrice},GTID={t.GTID} where GoodId={t.GoodId}");           
+        public int Upt(GoodsInfo t)
+        {
+            return DBHelper.ExecuteNonQuery($"update GoodInfo set GoodPhotoPath='{t.GoodPhotoPath}',GoodName='{t.GoodName}',GoodInfo='{t.GoodInfo}',GoodSum={t.GoodSum},GoodPrice={t.GoodPrice},GTID={t.GTID} where GoodId={t.GoodId}");
         }
         /// <summary>
-        /// 
+        /// 商品上下架,删除修改
         /// </summary>
-        /// <param name="t"></param>
+        /// <param name="id">商品id</param>
+        /// <param name="state">修改后的状态(0下架,1上架,3删除)</param>
         /// <returns></returns>
-        public int GoodStateUpt(GoodType t)
+        public int GoodStateUpt(int id,int state)
         {
-            int state;
-            if (t.GoodState == 0)
-                state = 1;
-            else
-                state = 0;
-            return DBHelper.ExecuteNonQuery($"update GoodInfo set GoodState={state} where GoodId={t.GoodId}");
+            return DBHelper.ExecuteNonQuery($"update GoodInfo set GoodState={state} where GoodId={id}");
         }
     }
 }

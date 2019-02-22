@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Pub;
 using Model;
 using System.Data.Entity.Infrastructure;
+using Newtonsoft.Json;
 
 namespace DAL
 {
@@ -43,16 +44,25 @@ namespace DAL
         /// 查询所有商品类型
         /// </summary>
         /// <returns></returns>
-        public List<GoodType> SelectAll()
+        public List<object> SelectAll(object[] obj)
         {
-            return DBHelper.GetList<GoodType>("select * from Goodtype");
+            var data= DBHelper.GetList<GoodType>("select * from Goodtype");
+            return JsonConvert.DeserializeObject<List<object>>(JsonConvert.SerializeObject(data));
         }
-
+        /// <summary>
+        /// 根据id获取商品类型对象
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns>商品类型对象</returns>
         public GoodType SelectById(int Id)
         {
             return DBHelper.GetList<GoodType>("select * from goodtype where GoodTypeId=" + Id).ToList().FirstOrDefault();
         }
-
+        /// <summary>
+        /// 商品类型修改
+        /// </summary>
+        /// <param name="t">商品类型对象</param>
+        /// <returns>受影响行数</returns>
         public int Upt(GoodType t)
         {
             throw new NotImplementedException();
