@@ -30,15 +30,17 @@ namespace WebApi.Controllers
         [HttpGet]
         public List<object> SelectPart(string str, string PageIndex, string PageSize)
         {
-            try
-            {
+            //try
+            //{
+                if (str == null)
+                    str = "";
                 object[] obj = { str, PageIndex, PageSize };
                 return Gbll.SelectAll(obj);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    return null;
+            //}
         }
         /// <summary>
         /// 根据id查询商品

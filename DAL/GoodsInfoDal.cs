@@ -44,28 +44,38 @@ namespace DAL
         {
             string str = obj[0].ToString();
             int IndexPage = IsNumber.IsNum(obj[1].ToString()) ? int.Parse(obj[1].ToString()) : 1;
-            int IndexSize = IsNumber.IsNum(obj[2].ToString()) ? int.Parse(obj[3].ToString()) : 10;
+            int IndexSize = IsNumber.IsNum(obj[2].ToString()) ? int.Parse(obj[2].ToString()) : 10;
             using (EFContext Context = new EFContext())
             {
-                var goods = (from s in Context.GoodsInfo
-                                         join b in Context.GoodType
-                                         on s.GTID equals b.GoodTypeId
-                                         select new
-                                         {
-                                             GoodPhotoPath=s.GoodPhotoPath,
-                                             GoodName=s.GoodName,
-                                             GoodInfo=s.GoodInfo,
-                                             GoodSellSum=s.GoodSellSum,
-                                             GoodSum=s.GoodSum,
-                                             GoodPrice=s.GoodPrice,
-                                             GoodTypeName=b.GoodTypeName
-                                         }).Where(m => str == "" ? true : m.GoodName == str || m.GoodInfo.Contains(str) || m.GoodTypeName == str).Reverse().Skip((IndexPage - 1) * IndexSize).Take(IndexSize).ToList();
-                List<object> data = new List<object>();
-                foreach (var item in goods)
+                try
                 {
-                    data.Add(item);
+                    var goods = (from s in Context.GoodsInfo
+                                 join b in Context.GoodType
+                                 on s.GTID equals b.GoodTypeId
+                                 orderby s.GoodId descending
+                                 select new
+                                 {
+                                     GoodPhotoPath = s.GoodPhotoPath,
+                                     GoodName = s.GoodName,
+                                     GoodInfo = s.GoodInfo,
+                                     GoodSellSum = s.GoodSellSum,
+                                     GoodSum = s.GoodSum,
+                                     GoodPrice = s.GoodPrice,
+                                     GoodTypeName = b.GoodTypeName
+                                 }).Where(m => str == "" ? true : m.GoodName == str || m.GoodInfo.Contains(str) || m.GoodTypeName == str).Skip((IndexPage - 1) * IndexSize).Take(IndexSize).ToList();
+                    List<object> data = new List<object>();
+                    foreach (var item in goods)
+                    {
+                        data.Add(item);
+                    }
+                    return data;
                 }
-                return data;
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+                
             }
         }
         /// <summary>
