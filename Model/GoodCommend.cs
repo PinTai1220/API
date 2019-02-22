@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 namespace Model
 {
     /// <summary>
     /// 商品评论
     /// </summary>
+    [Table("GoodCommend")]
     public class GoodCommend
     {
         /// <summary>

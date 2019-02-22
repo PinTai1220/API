@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using Model;
 
-namespace Pub
+namespace DAL
 {
     public class EFContext:DbContext
     {
