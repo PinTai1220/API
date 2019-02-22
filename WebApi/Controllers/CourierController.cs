@@ -12,6 +12,7 @@ namespace WebApi.Controllers
     //货单
     public class CourierController : ApiController
     {
+        CourierBll Cbll = new CourierBll();
         /// <summary>
         /// 查询分页
         /// </summary>
@@ -23,9 +24,19 @@ namespace WebApi.Controllers
         /// <param name="IndexSize">记录数</param>
         /// <returns></returns>
         [HttpGet]
-        public List<object> GetSome(string str, int IndexPage, int IndexSize)
+        public List<object> GetSome(dynamic parameters)
         {
-            return CourierBll.List(str, IndexPage, IndexSize);
+            try
+            {
+                object[] obj = { Convert.ToString(parameters.str), Convert.ToString(parameters.PageIndex), Convert.ToString(parameters.PageSize) };
+                return Cbll.List(obj);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }
