@@ -10,9 +10,10 @@ namespace BLL
 {
     public class CourierBll
     {
-        public static List<object> List(string str, int IndexPage, int IndexSize)
+        CourierDal Cdal = new CourierDal();
+        public List<object> List(object[] obj)
         {
-            return CourierDal.List(str, IndexPage, IndexSize);
+            return Cdal.SelectAll(obj);
         }
     }
 }

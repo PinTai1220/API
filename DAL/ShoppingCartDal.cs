@@ -18,7 +18,7 @@ namespace DAL
         {
             t.ShoppingCartState = 1;
             t.ShoppingCartCreateTime= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-            
+            return 1;
         }
         public int Delete(int Id)
         {
