@@ -21,6 +21,7 @@ namespace DAL
         {
             using (EFContext Context = new EFContext())
             {
+                t.GoodCreateTime= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
                 DbEntityEntry<GoodsInfo> dbEntityAdm = Context.Entry<GoodsInfo>(t);
                 dbEntityAdm.State = System.Data.Entity.EntityState.Added;
                 return Context.SaveChanges();
@@ -39,13 +40,32 @@ namespace DAL
         /// 查询所有商品
         /// </summary>
         /// <returns></returns>
-        public List<GoodsInfo> SelectAll()
+        public List<object> SelectAll(object[] obj)
         {
+            string str = obj[0].ToString();
+            int IndexPage = IsNumber.IsNum(obj[1].ToString()) ? int.Parse(obj[1].ToString()) : 1;
+            int IndexSize = IsNumber.IsNum(obj[2].ToString()) ? int.Parse(obj[3].ToString()) : 10;
             using (EFContext Context = new EFContext())
             {
-                List<GoodsInfo> goods = (from s in Context.GoodsInfo
-                                         select s).ToList();
-                return goods;
+                var goods = (from s in Context.GoodsInfo
+                                         join b in Context.GoodType
+                                         on s.GTID equals b.GoodTypeId
+                                         select new
+                                         {
+                                             GoodPhotoPath=s.GoodPhotoPath,
+                                             GoodName=s.GoodName,
+                                             GoodInfo=s.GoodInfo,
+                                             GoodSellSum=s.GoodSellSum,
+                                             GoodSum=s.GoodSum,
+                                             GoodPrice=s.GoodPrice,
+                                             GoodTypeName=b.GoodTypeName
+                                         }).Where(m => str == "" ? true : m.GoodName == str || m.GoodInfo.Contains(str) || m.GoodTypeName == str).Reverse().Skip((IndexPage - 1) * IndexSize).Take(IndexSize).ToList();
+                List<object> data = new List<object>();
+                foreach (var item in goods)
+                {
+                    data.Add(item);
+                }
+                return data;
             }
         }
         /// <summary>
@@ -58,8 +78,8 @@ namespace DAL
             using (EFContext Context = new EFContext())
             {
                 GoodsInfo good = (from s in Context.GoodsInfo
-                                   where s.Equals(Id)
-                                   select s).FirstOrDefault();
+                                  where s.Equals(Id)
+                                  select s).FirstOrDefault();
                 return good;
             }
         }
@@ -69,22 +89,18 @@ namespace DAL
         /// <param name="t"></param>
         /// <returns></returns>
         public int Upt(GoodsInfo t)
-        { 
-             return DBHelper.ExecuteNonQuery($"update GoodInfo set GoodPhotoPath='{t.GoodPhotoPath}',GoodName='{t.GoodName}',GoodInfo='{t.GoodInfo}',GoodSum={t.GoodSum},GoodPrice={t.GoodPrice},GTID={t.GTID} where GoodId={t.GoodId}");           
+        {
+            return DBHelper.ExecuteNonQuery($"update GoodInfo set GoodPhotoPath='{t.GoodPhotoPath}',GoodName='{t.GoodName}',GoodInfo='{t.GoodInfo}',GoodSum={t.GoodSum},GoodPrice={t.GoodPrice},GTID={t.GTID} where GoodId={t.GoodId}");
         }
         /// <summary>
-        /// 
+        /// 商品上下架,删除修改
         /// </summary>
-        /// <param name="t"></param>
+        /// <param name="id">商品id</param>
+        /// <param name="state">修改后的状态(0下架,1上架,3删除)</param>
         /// <returns></returns>
-        public int GoodStateUpt(GoodsInfo t)
+        public int GoodStateUpt(int id,int state)
         {
-            int state;
-            if (t.GoodState == 0)
-                state = 1;
-            else
-                state = 0;
-            return DBHelper.ExecuteNonQuery($"update GoodInfo set GoodState={state} where GoodId={t.GoodId}");
+            return DBHelper.ExecuteNonQuery($"update GoodInfo set GoodState={state} where GoodId={id}");
         }
     }
 }

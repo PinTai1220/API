@@ -38,6 +38,10 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\..\..\Desktop\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,9 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministratorDal.cs" />
+    <Compile Include="CourierDal.cs" />
     <Compile Include="GoodsInfoDal.cs" />
     <Compile Include="GoodTypeDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCartDal.cs" />
     <Compile Include="UserInfoDal.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +69,9 @@
       <Project>{a4a3005a-5d0c-4071-94f8-107104736252}</Project>
       <Name>Pub</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Newtonsoft.Json.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
