@@ -28,11 +28,11 @@ namespace WebApi.Controllers
         /// <param name="parameters"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<object> SelectPart(dynamic parameters)
+        public List<object> SelectPart(string str, string PageIndex, string PageSize)
         {
             try
             {
-                object[] obj = { Convert.ToString(parameters.str), Convert.ToString(parameters.PageIndex), Convert.ToString(parameters.PageSize) };
+                object[] obj = { str, PageIndex, PageSize };
                 return Gbll.SelectAll(obj);
             }
             catch (Exception)

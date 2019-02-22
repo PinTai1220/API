@@ -22,7 +22,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public List<object> GetAll(string str, int PageIndex, int PageSize)
         {
-            return ubll.List(str,PageIndex,PageSize);
+            object[] obj = { str, PageIndex, PageSize };
+            return ubll.List(obj);
         }
         /// <summary>
         /// 

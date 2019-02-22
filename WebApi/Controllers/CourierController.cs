@@ -24,11 +24,11 @@ namespace WebApi.Controllers
         /// <param name="IndexSize">记录数</param>
         /// <returns></returns>
         [HttpGet]
-        public List<object> GetSome(dynamic parameters)
+        public List<object> GetSome(string str,string PageIndex, string PageSize)
         {
             try
             {
-                object[] obj = { Convert.ToString(parameters.str), Convert.ToString(parameters.PageIndex), Convert.ToString(parameters.PageSize) };
+                object[] obj = { str, PageIndex,PageSize};
                 return Cbll.List(obj);
             }
             catch (Exception)
@@ -37,6 +37,16 @@ namespace WebApi.Controllers
                 throw;
             }
             
+        }
+        /// <summary>
+        /// 发货信息添加
+        /// </summary>
+        /// <param name="courier"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public int Add(Courier courier)
+        {
+            return Cbll.Add(courier);
         }
     }
 }

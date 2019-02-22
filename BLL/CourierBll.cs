@@ -15,5 +15,11 @@ namespace BLL
         {
             return Cdal.SelectAll(obj);
         }
+        public int Add(Courier courier)
+        {
+            courier.CourierCreateTime= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            courier.CourierNum= DateTime.Now.ToString("yyMMddhhmmssffff");
+            return Cdal.Add(courier);
+        }
     }
 }

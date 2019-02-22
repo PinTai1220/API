@@ -51,6 +51,7 @@
     <Compile Include="AddressInfo.cs" />
     <Compile Include="Administrator.cs" />
     <Compile Include="Courier.cs" />
+    <Compile Include="GoodCommend.cs" />
     <Compile Include="GoodsInfo.cs" />
     <Compile Include="GoodType.cs" />
     <Compile Include="OrderInfo.cs" />

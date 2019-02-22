@@ -16,9 +16,8 @@ namespace BLL
             use.UserCraeteTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             return userdal.Add(use);
         }
-        public List<object> List(string str,int PageIndex,int PageSize)
+        public List<object> List(object[] obj)
         {
-            object[] obj = { str, PageIndex, PageSize };
             return userdal.SelectAll(obj);
         }
         public UserInfo GetById(int id)

@@ -21,17 +21,9 @@ namespace DAL
             UserInfo data = t as UserInfo;
             using (EFContext Context = new EFContext())
             {
-                data.UserCraeteTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
                 DbEntityEntry<UserInfo> dbEntityUser = Context.Entry<UserInfo>(data);
-                try
-                {
-                    return Context.SaveChanges();
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                dbEntityUser.State = System.Data.Entity.EntityState.Added;
+                return Context.SaveChanges();
             }
         }
         /// <summary>
