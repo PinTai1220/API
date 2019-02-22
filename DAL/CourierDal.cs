@@ -46,6 +46,7 @@ namespace DAL
                             on c.GID equals d.GoodId
                             join e in Context.GoodType
                             on d.GTID equals e.GoodTypeId
+                            orderby a.CourierId descending
                             select new
                             {
                                 CourierId = a.CourierId,
