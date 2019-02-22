@@ -18,7 +18,7 @@ namespace DAL
         /// <returns></returns>
         public int Add(ShoppingCart t)
         {
-            return 1;
+            return (int)DBHelper.ExecuteScalar($"declare @result int exec p_ShoppingCart {t.UID},{t.GID},{t.Num},@result output select @result");
         }
         public int Delete(int Id)
         {
