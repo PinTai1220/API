@@ -18,7 +18,13 @@ namespace DAL
         /// <returns></returns>
         public int Add(ShoppingCart t)
         {
-            return (int)DBHelper.ExecuteScalar($"declare @result int exec p_ShoppingCart {t.UID},{t.GID},{t.Num},@result output select @result");
+            
+            using(EFContext Context = new EFContext())
+            {
+                DbEntityEntry<ShoppingCart> dbEntityAdm = Context.Entry<ShoppingCart>(t);
+                dbEntityAdm.State = System.Data.Entity.EntityState.Added;
+                return Context.SaveChanges();
+            }
         }
         public int Delete(int Id)
         {

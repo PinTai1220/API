@@ -40,12 +40,6 @@ namespace DAL
                 var list = (from a in Context.Courier
                             join b in Context.OrderInfo
                             on a.OID equals b.OrderId
-                            join c in Context.ShoppingCart
-                            on b.SCID equals c.ShoppingCartId
-                            join d in Context.GoodsInfo
-                            on c.GID equals d.GoodId
-                            join e in Context.GoodType
-                            on d.GTID equals e.GoodTypeId
                             orderby a.CourierId descending
                             select new
                             {
@@ -56,10 +50,8 @@ namespace DAL
                                 OTGPhone = b.OTGPhone,
                                 OTGAddress = b.OTGAddress,
                                 OrderNum = b.OrderNum,
-                                OGoodName = b.OGoodName,
-                                GoodTypeName = e.GoodTypeName,
-                                GoodPhotoPath = d.GoodPhotoPath.Substring(0, d.GoodPhotoPath.IndexOf('.'))
-                            }).Where(m => str == "" ? true : m.CourierNum == str || m.OTGName == str || m.OTGPhone == str || m.OTGAddress.Contains(str) || m.OrderNum == str || m.OGoodName == str || m.GoodTypeName == str).Reverse().Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
+                                BuyGoodsAndSum = b.BuyGoodsAndSum
+                            }).Where(m => str == "" ? true : m.CourierNum == str || m.OTGName == str || m.OTGPhone == str || m.OTGAddress.Contains(str) || m.OrderNum == str || m.BuyGoodsAndSum.Contains(str)).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
                 List<object> olist = new List<object>();
                 foreach (var item in list)
                 {

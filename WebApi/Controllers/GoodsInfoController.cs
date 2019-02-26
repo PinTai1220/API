@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using BLL;
 using Model;
+using Newtonsoft.Json;
 
 namespace WebApi.Controllers
 {
@@ -35,7 +36,9 @@ namespace WebApi.Controllers
                 if (str == null)
                     str = "";
                 object[] obj = { str, PageIndex, PageSize,state };
-                return Gbll.SelectAll(obj);
+                List<object> data= Gbll.SelectAll(obj);
+                string datastr = JsonConvert.SerializeObject(data);
+                return data;
             }
             catch (Exception)
             {
