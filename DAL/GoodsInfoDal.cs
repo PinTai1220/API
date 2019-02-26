@@ -104,7 +104,7 @@ namespace DAL
         /// <returns></returns>
         public int GoodStateUpt(int id,int state)
         {
-            return DBHelper.ExecuteNonQuery($"update GoodInfo set GoodState={state} where GoodId={id}");
+            return DBHelper.ExecuteNonQuery($"update GoodsInfo set GoodState={state} where GoodId={id}");
         }
     }
 }
