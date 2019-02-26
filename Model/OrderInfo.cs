@@ -18,7 +18,7 @@ namespace Model
         [Key]
         public int OrderId { get; set; }
         /// <summary>
-        /// 订单号（日期yyyyMMddhhmmss）
+        /// 订单号（日期yyyyMMddhhmmss+两位随机数）
         /// </summary>
         public string OrderNum { get; set; }
         /// <summary>
@@ -34,13 +34,9 @@ namespace Model
         /// </summary>
         public string OTGAddress { get; set; }
         /// <summary>
-        /// 购物车id
+        /// 购买的商品和数量
         /// </summary>
-        public int SCID { get; set; }
-        /// <summary>
-        /// 商品名称
-        /// </summary>
-        public string OGoodName { get; set; }
+        public string BuyGoodsAndSum { get; set; }
         /// <summary>
         /// 订单状态
         /// </summary>

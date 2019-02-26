@@ -28,13 +28,15 @@ namespace WebApi.Controllers
         {
             try
             {
+                if (str == null)
+                    str = "";
                 object[] obj = { str, PageIndex,PageSize};
                 return Cbll.List(obj);
             }
             catch (Exception)
             {
 
-                throw;
+                return null;
             }
             
         }

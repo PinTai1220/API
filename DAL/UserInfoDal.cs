@@ -51,6 +51,7 @@ namespace DAL
                 var users = (from s in Context.UserInfo
                              join b in Context.TakeGoodsInfo
                              on s.UserId equals b.UID
+                             orderby s.UserId descending
                              select new
                              {
                                  UserAccount=s.UserAccount,
@@ -61,7 +62,7 @@ namespace DAL
                                  TGName = b.TGName,
                                  TGAddress=b.TGAddress,
                                  TGPhone=b.TGPhone
-                             }).Where(m=>str==""?true:m.UserAccount==str || m.UserName==str ||m.PhoneNumber==str||m.Email==str || m.TGName == str || m.TGPhone == str || m.TGAddress.Contains(str)).Reverse().Skip(( PageIndex- 1) * PageSize).Take(PageSize).ToList();
+                             }).Where(m=>str==""?true:m.UserAccount==str || m.UserName==str ||m.PhoneNumber==str||m.Email==str || m.TGName == str || m.TGPhone == str || m.TGAddress.Contains(str)).Skip(( PageIndex- 1) * PageSize).Take(PageSize).ToList();
                 List<object> data = new List<object>();
                 foreach (var item in users)
                 {

@@ -21,12 +21,21 @@ namespace WebApi.Controllers
         [HttpGet]
         public int Login(string AdministratorAccount, string AdministratorPwd)
         {
-            Administrator administrator = new Administrator
+            try
             {
-                AdministratorAccount = AdministratorAccount,
-                AdministratorPwd = AdministratorPwd
-            };
-            return abll.Login(administrator);
+                Administrator administrator = new Administrator
+                {
+                    AdministratorAccount = AdministratorAccount,
+                    AdministratorPwd = AdministratorPwd
+                };
+                return abll.Login(administrator);
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+            
         }
         /// <summary>
         /// 密码修改和发货信息修改

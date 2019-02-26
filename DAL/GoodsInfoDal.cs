@@ -63,7 +63,7 @@ namespace DAL
                                              GoodSum=s.GoodSum,
                                              GoodPrice=s.GoodPrice,
                                              GoodTypeName=b.GoodTypeName
-                                         }).Where(m => str == "" ? true : m.GoodName == str || m.GoodInfo.Contains(str) || m.GoodTypeName == str).Skip((IndexPage - 1) * IndexSize).Take(IndexSize).ToList();
+                                         }).Where(m => str == "" ? true : m.GoodName.Contains(str) || m.GoodInfo.Contains(str) || m.GoodTypeName == str).Skip((IndexPage - 1) * IndexSize).Take(IndexSize).ToList();
                 List<object> data = new List<object>();
                 foreach (var item in goods)
                 {
@@ -82,7 +82,7 @@ namespace DAL
             using (EFContext Context = new EFContext())
             {
                 GoodsInfo good = (from s in Context.GoodsInfo
-                                  where s.Equals(Id)
+                                  where s.GoodId.Equals(Id)
                                   select s).FirstOrDefault();
                 return good;
             }
