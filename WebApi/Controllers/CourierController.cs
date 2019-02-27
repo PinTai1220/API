@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using BLL;
 using Model;
+using Newtonsoft.Json;
 
 namespace WebApi.Controllers
 {
@@ -24,14 +25,14 @@ namespace WebApi.Controllers
         /// <param name="IndexSize">记录数</param>
         /// <returns></returns>
         [HttpGet]
-        public List<object> GetSome(string str,string PageIndex, string PageSize)
+        public string GetSome(string str,string PageIndex, string PageSize)
         {
             try
             {
                 if (str == null)
                     str = "";
                 object[] obj = { str, PageIndex,PageSize};
-                return Cbll.List(obj);
+                return JsonConvert.SerializeObject(Cbll.List(obj));
             }
             catch (Exception)
             {
