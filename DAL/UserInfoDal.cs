@@ -45,12 +45,13 @@ namespace DAL
         {
             string str = obj[0].ToString();
             int PageIndex= IsNumber.IsNum(obj[1].ToString()) ? int.Parse(obj[1].ToString()) : 1;
-            int PageSize = IsNumber.IsNum(obj[2].ToString()) ? int.Parse(obj[3].ToString()) : 10;
+            int PageSize = IsNumber.IsNum(obj[2].ToString()) ? int.Parse(obj[2].ToString()) : 10;
             using (EFContext Context = new EFContext())
             {
                 var users = (from s in Context.UserInfo
                              join b in Context.TakeGoodsInfo
-                             on s.UserId equals b.UID
+                             on s.UserId equals b.UID into joinleft
+                             from b in joinleft.DefaultIfEmpty()
                              orderby s.UserId descending
                              select new
                              {
@@ -62,7 +63,7 @@ namespace DAL
                                  TGName = b.TGName,
                                  TGAddress=b.TGAddress,
                                  TGPhone=b.TGPhone
-                             }).Where(m=>str==""?true:m.UserAccount==str || m.UserName==str ||m.PhoneNumber==str||m.Email==str || m.TGName == str || m.TGPhone == str || m.TGAddress.Contains(str)).Skip(( PageIndex- 1) * PageSize).Take(PageSize).ToList();
+                             }).Where(m => str == "" ? true : m.UserAccount == str || m.UserName == str || m.PhoneNumber == str || m.Email == str || m.TGName == str || m.TGPhone == str || m.TGAddress.Contains(str)).Skip(( PageIndex- 1) * PageSize).Take(PageSize).ToList();
                 List<object> data = new List<object>();
                 foreach (var item in users)
                 {
