@@ -51,9 +51,9 @@ namespace WebApi.Controllers
         /// <param name="id"></param>
         /// <returns>json数据</returns>
         [HttpGet]
-        public string SelectById(int id)
+        public string SelectById(int id,int uid)
         {
-            return JsonConvert.SerializeObject(Gbll.SelectById(id));
+            return JsonConvert.SerializeObject(Gbll.SelectById(id,uid));
         }
         /// <summary>
         /// 商品信息修改

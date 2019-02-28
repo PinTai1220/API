@@ -12,6 +12,7 @@ namespace BLL
     public class GoodsInfoBll
     {
         GoodsInfoDal Gdal = new GoodsInfoDal();
+        TakeGoodsInfoDal addinfo = new TakeGoodsInfoDal();
         public int Add(GoodsInfo goods)
         {
             goods.GoodCreateTime= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
@@ -21,12 +22,44 @@ namespace BLL
         {
             return Gdal.SelectAll(obj);
         }
-        public dynamic SelectById(int id)
+        public object SelectById(int id,int uid)
         {
-            GoodsInfo good = Gdal.SelectById(id);
+            try
+            {
+                GoodsInfo good = Gdal.SelectById(id);
+                TakeGoodsInfo ainfo = addinfo.SelectById(uid);
+                string serverpath= System.Web.HttpContext.Current.Server.MapPath("/Imgs");
+                if (ainfo == null)
+                    ainfo = new TakeGoodsInfo();
+                ainfo.TGAddress = "收货信息未设置";
 
-            var data=new { };
-            return data;
+                List<Path> paths = new List<Path>();
+                string[] phonos = good.GoodPhotoPath.Split('-');
+                string newpath = "";
+                foreach (var item in phonos)
+                {
+                    newpath = serverpath + item;
+                    paths.Add(new Path() { src = newpath });
+                }
+                var data = new {
+                    GoodId=good.GoodId,
+                    GoodName=good.GoodName,
+                    GoodInfo=good.GoodInfo,
+                    GoodPrice=good.GoodPrice,
+                    GoodSum=good.GoodSum,
+                    GoodPhotoPath=paths,
+                    address=ainfo.TGAddress,
+                };
+                return data;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        private class Path
+        {
+            public string src { get; set; }
         }
         public int Upt(GoodsInfo good)
         {

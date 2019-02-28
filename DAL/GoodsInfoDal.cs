@@ -56,7 +56,7 @@ namespace DAL
                                          select new
                                          {
                                              GoodId=s.GoodId,
-                                             GoodPhotoPath = s.GoodPhotoPath.Substring(0,IsSplit.Split(s.GoodPhotoPath)),
+                                             GoodPhotoPath = s.GoodPhotoPath,
                                              GoodName = s.GoodName,
                                              GoodInfo = s.GoodInfo,
                                              GoodSellSum =s.GoodSellSum,

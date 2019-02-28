@@ -28,6 +28,8 @@ namespace BLL
         }
         public int Upt(OrderInfo t)
         {
+            //if(t.OrderState==2)
+            //if(t.OrderState==5)
             return OrderDal.Upt(t);
         }
     }
