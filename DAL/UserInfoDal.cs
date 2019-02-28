@@ -95,7 +95,7 @@ namespace DAL
         /// <returns></returns>
         public int Login(string Account,string Pwd)
         {
-            DBHelper.ExecuteScalar($"select 1 from UserInfo where UserAccount='{Account}' and UserPwd='{Pwd}'")
+            return (int)DBHelper.ExecuteScalar($"select 1 from UserInfo where UserAccount='{Account}' and UserPwd='{Pwd}'");
         }
         /// <summary>
         /// 修改用户信息或修改密码
