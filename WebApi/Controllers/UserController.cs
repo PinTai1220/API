@@ -65,5 +65,25 @@ namespace WebApi.Controllers
         {
             return ubll.Upt(user);
         }
+        /// <summary>
+        /// 登录判断
+        /// </summary>
+        /// <param name="Account"></param>
+        /// <param name="Pwd"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public int Login(dynamic info)
+        {
+            try
+            {
+                string account = info.UserAccount;
+                string pwd = info.UserPwd;
+                return ubll.Login(account, pwd);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
     }
 }

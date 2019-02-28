@@ -21,9 +21,12 @@ namespace BLL
         {
             return Gdal.SelectAll(obj);
         }
-        public GoodsInfo SelectById(int id)
+        public dynamic SelectById(int id)
         {
-            return Gdal.SelectById(id);
+            GoodsInfo good = Gdal.SelectById(id);
+
+            var data=new { };
+            return data;
         }
         public int Upt(GoodsInfo good)
         {

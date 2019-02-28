@@ -31,19 +31,19 @@ namespace WebApi.Controllers
         [HttpGet]
         public string SelectPart(string str, string PageIndex, string PageSize,string state)
         {
-            try
-            {
+            //try
+            //{
                 if (str == null)
                     str = "";
                 object[] obj = { str, PageIndex, PageSize,state };
                 List<object> data= Gbll.SelectAll(obj);
                 string datastr = JsonConvert.SerializeObject(data);
                 return datastr;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    return null;
+            //}
         }
         /// <summary>
         /// 根据id查询商品

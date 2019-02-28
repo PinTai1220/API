@@ -28,5 +28,15 @@ namespace BLL
         {
             return userdal.Upt(use);
         }
+        /// <summary>
+        /// 登录判断
+        /// </summary>
+        /// <param name="Account"></param>
+        /// <param name="Pwd"></param>
+        /// <returns></returns>
+        public int Login(string Account, string Pwd)
+        {
+            return userdal.Login(Account, Pwd);
+        }
     }
 }
