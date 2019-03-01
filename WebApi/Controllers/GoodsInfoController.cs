@@ -53,7 +53,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public string SelectById(int id,int uid)
         {
-            return JsonConvert.SerializeObject(Gbll.SelectById(id,uid));
+            string jsonstr= JsonConvert.SerializeObject(Gbll.SelectById(id, uid));
+            return jsonstr;
         }
         /// <summary>
         /// 商品信息修改

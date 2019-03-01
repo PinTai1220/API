@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SalesRecordDal.cs" />
     <Compile Include="TakeGoodsInfoDal.cs" />
     <Compile Include="AdministratorDal.cs" />
     <Compile Include="CourierDal.cs" />
