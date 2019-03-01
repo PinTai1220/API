@@ -66,29 +66,24 @@ namespace WebApi.Controllers
             return ubll.Upt(user);
         }
         /// <summary>
-        /// 商场管理员登录
+        /// 登录判断
         /// </summary>
-        /// <param name="AdministratorAccount"></param>
-        /// <param name="AdministratorPwd"></param>
+        /// <param name="Account"></param>
+        /// <param name="Pwd"></param>
         /// <returns></returns>
-        [HttpGet]
-        public int Login(string UserInfoName, string UserInfoPwd)
+        [HttpPost]
+        public int Login(dynamic info)
         {
             try
             {
-                UserInfo userInfo = new UserInfo
-                {
-                    UserName = UserInfoName,
-                    UserPwd = UserInfoPwd
-                };
-                return ubll.AddLogin(userInfo);
+                string account = info.UserAccount;
+                string pwd = info.UserPwd;
+                return ubll.Login(account, pwd);
             }
             catch (Exception)
             {
-
                 return 0;
             }
-
         }
     }
 }

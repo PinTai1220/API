@@ -88,6 +88,16 @@ namespace DAL
             }
         }
         /// <summary>
+        /// 登录判断
+        /// </summary>
+        /// <param name="Account"></param>
+        /// <param name="Pwd"></param>
+        /// <returns></returns>
+        public int Login(string Account,string Pwd)
+        {
+            return (int)DBHelper.ExecuteScalar($"select 1 from UserInfo where UserAccount='{Account}' and UserPwd='{Pwd}'");
+        }
+        /// <summary>
         /// 修改用户信息或修改密码
         /// </summary>
         /// <param name="t">用户对象</param>

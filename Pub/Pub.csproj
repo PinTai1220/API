@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="IOperation_generic.cs" />
     <Compile Include="IsNumber.cs" />
+    <Compile Include="IsSplit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

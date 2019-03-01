@@ -28,15 +28,15 @@ namespace BLL
         {
             return userdal.Upt(use);
         }
-
         /// <summary>
-        /// 管理员信息添加
+        /// 登录判断
         /// </summary>
-        /// <param name="t">Administrator对象</param>
+        /// <param name="Account"></param>
+        /// <param name="Pwd"></param>
         /// <returns></returns>
-        public int AddLogin(UserInfo t)
+        public int Login(string Account, string Pwd)
         {
-            return userdal.AddLogin(t);
+            return userdal.Login(Account, Pwd);
         }
     }
 }

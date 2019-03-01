@@ -56,13 +56,14 @@ namespace DAL
                                          select new
                                          {
                                              GoodId=s.GoodId,
-                                             GoodPhotoPath =s.GoodPhotoPath,
-                                             GoodName=s.GoodName,
-                                             GoodInfo=s.GoodInfo,
+                                             GoodPhotoPath = s.GoodPhotoPath,
+                                             GoodName = s.GoodName,
+                                             GoodInfo = s.GoodInfo,
                                              GoodSellSum =s.GoodSellSum,
                                              GoodSum=s.GoodSum,
-                                             GoodPrice=s.GoodPrice,
-                                             GoodTypeName=b.GoodTypeName
+                                             GoodPrice = s.GoodPrice,
+                                             GoodTypeName=b.GoodTypeName,
+                                             href= "/detail/"+s.GoodId
                                          }).Where(m => str == "" ? true : m.GoodName.Contains(str) || m.GoodInfo.Contains(str) || m.GoodTypeName == str).Skip((IndexPage - 1) * IndexSize).Take(IndexSize).ToList();
                 List<object> data = new List<object>();
                 foreach (var item in goods)

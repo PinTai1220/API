@@ -27,33 +27,34 @@ namespace WebApi.Controllers
         /// 商品查询
         /// </summary>
         /// <param name="parameters"></param>
-        /// <returns></returns>
+        /// <returns>json数据</returns>
         [HttpGet]
-        public List<object> SelectPart(string str, string PageIndex, string PageSize,string state)
+        public string SelectPart(string str, string PageIndex, string PageSize,string state)
         {
-            try
-            {
+            //try
+            //{
                 if (str == null)
                     str = "";
                 object[] obj = { str, PageIndex, PageSize,state };
                 List<object> data= Gbll.SelectAll(obj);
                 string datastr = JsonConvert.SerializeObject(data);
-                return data;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+                return datastr;
+            //}
+            //catch (Exception)
+            //{
+            //    return null;
+            //}
         }
         /// <summary>
         /// 根据id查询商品
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>json数据</returns>
         [HttpGet]
-        public GoodsInfo SelectById(int id)
+        public string SelectById(int id,int uid)
         {
-            return Gbll.SelectById(id);
+            string jsonstr= JsonConvert.SerializeObject(Gbll.SelectById(id, uid));
+            return jsonstr;
         }
         /// <summary>
         /// 商品信息修改
