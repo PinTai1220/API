@@ -65,5 +65,30 @@ namespace WebApi.Controllers
         {
             return ubll.Upt(user);
         }
+        /// <summary>
+        /// 商场管理员登录
+        /// </summary>
+        /// <param name="AdministratorAccount"></param>
+        /// <param name="AdministratorPwd"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public int Login(string UserInfoName, string UserInfoPwd)
+        {
+            try
+            {
+                UserInfo userInfo = new UserInfo
+                {
+                    UserName = UserInfoName,
+                    UserPwd = UserInfoPwd
+                };
+                return ubll.AddLogin(userInfo);
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+
+        }
     }
 }
