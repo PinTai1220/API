@@ -95,6 +95,7 @@ namespace BLL
                     good.GoodInfo,
                     good.GoodPrice,
                     good.GoodSum,
+                    good.GoodState,
                     GoodPhotoPath=paths,
                     address=ainfo.TGAddress,
                 };

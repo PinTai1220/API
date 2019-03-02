@@ -15,5 +15,13 @@ namespace BLL
         {
             return Gdal.SelectAll(null);
         }
+        public int Addtype(GoodType t)
+        {
+            return Gdal.Add(t);
+        }
+        public int Upt(GoodType t)
+        {
+            return Gdal.Upt(t);
+        }
     }
 }
