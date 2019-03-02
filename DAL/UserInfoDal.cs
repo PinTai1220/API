@@ -128,5 +128,40 @@ namespace DAL
                 return Context.SaveChanges();
             }
         }
+
+
+        /// <summary>
+        /// 管理员信息添加
+        /// </summary>
+        /// <param name="t">Administrator对象</param>
+        /// <returns></returns>
+        public int AddLogin(UserInfo t)
+        {
+            using (EFContext Context = new EFContext())
+            {
+                var jieguo = from s in Context.UserInfo
+                             select s;
+                if (jieguo.FirstOrDefault() == null)
+                {
+                    UserInfo userInfo = new UserInfo()
+                    {
+                        UserName = t.UserName,
+                        UserPwd = t.UserPwd
+                    };
+                    DbEntityEntry<UserInfo> dbEntityAdm = Context.Entry<UserInfo>(userInfo);
+                    dbEntityAdm.State = System.Data.Entity.EntityState.Added;
+                    return Context.SaveChanges();
+                }
+                else
+                {
+                    jieguo = jieguo.Where(a => a.UserName == t.UserName && a.UserPwd == t.UserPwd);
+                    if (jieguo.FirstOrDefault() != null)
+                        return 1;
+                    else
+                        return 0;
+                }
+            }
+        }
+
     }
 }
