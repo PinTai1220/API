@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DAL;
 using Model;
 using Pub;
+using System.Runtime.InteropServices;
 
 namespace BLL
 {
@@ -17,7 +18,7 @@ namespace BLL
         TakeGoodsInfoDal addinfo = new TakeGoodsInfoDal();
         public int Add(GoodsInfo goods)
         {
-            goods.GoodCreateTime= DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            goods.GoodCreateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             return Gdal.Add(goods);
         }
         public List<object> SelectAll(object[] obj)
@@ -68,10 +69,13 @@ namespace BLL
                 };
                 newlist.Add(newdata);
             }
-            
             return newlist;
         }
-        public object SelectById(int id,int uid)
+        public GoodsInfo SelectByIdGood(int Id)
+        {
+            return Gdal.SelectById(Id);
+        }
+        public object SelectById(int id, int uid)
         {
             try
             {
@@ -89,15 +93,16 @@ namespace BLL
                     newpath = "http://localhost:54217/Imgs/" + item;
                     paths.Add(new Path() { src = newpath });
                 }
-                var data = new {
+                var data = new
+                {
                     good.GoodId,
                     good.GoodName,
                     good.GoodInfo,
                     good.GoodPrice,
                     good.GoodSum,
                     good.GoodState,
-                    GoodPhotoPath=paths,
-                    address=ainfo.TGAddress,
+                    GoodPhotoPath = paths,
+                    address = ainfo.TGAddress,
                 };
                 return data;
             }
@@ -114,7 +119,7 @@ namespace BLL
         {
             return Gdal.Upt(good);
         }
-        public int GoodStateUpt(int id,int state)
+        public int GoodStateUpt(int id, int state)
         {
             return Gdal.GoodStateUpt(id, state);
         }

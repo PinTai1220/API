@@ -45,11 +45,22 @@ namespace WebApi.Controllers
             //    return null;
             //}
         }
+
         /// <summary>
         /// 根据id查询商品
         /// </summary>
         /// <param name="id"></param>
         /// <returns>json数据</returns>
+        public string SelectByIdGood(int Id)
+        {
+            return JsonConvert.SerializeObject(Gbll.SelectByIdGood(Id));
+        }
+        /// <summary>
+        /// 根据商品id查询商品,用户id查询获取用户收货信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="uid"></param>
+        /// <returns></returns>
         [HttpGet]
         public string SelectById(int id,int uid)
         {
